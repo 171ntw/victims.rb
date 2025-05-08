@@ -7,7 +7,7 @@ get '/' do
   { 
     status: 200,
     author: {
-        github: 'https://github.com/171ntw/',
+        github: 'https://github.com/171ntw',
         download: 'https://github.com/171ntw/victims.rb',
         message: "This is a public API created with the API of a friend, owner of victims.bio"
     },
@@ -19,19 +19,19 @@ end
 
 get '/user' do
   content_type :json
-  
-  begin
-    discord_id = params['id'] || false
 
-    if discord_id == false || discord_id.nil? || discord_id.empty?
+  begin
+    discord_id = params['id']
+
+    if discord_id.nil? || discord_id.empty?
       return { error: "Parameter 'id' is required. Example: /user?id=123456789" }.to_json
     end
 
     response = HTTP.get("https://api.victims.bio/discord/user/#{discord_id}")
-    
-    if response.parse['user']
-    
-      JSON.pretty_generate(response)
+    parsed_data = JSON.parse(response.body.to_s)
+
+    if parsed_data['user']
+      parsed_data.to_json
     else
       { error: 'User not found or error in external API' }.to_json
     end
