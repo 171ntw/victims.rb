@@ -84,15 +84,3 @@ curl "http://localhost:4567/card?id=922871214312144926"
 ```bash
 curl "http://localhost:4567/user"
 ```
-
----
-
-## License
-
-MIT License.
-
-Github: https://github.com/171ntw/
-
----
-
-**Enjoy using the Discord User Info API!**
