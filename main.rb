@@ -12,9 +12,10 @@ get '/' do
         message: "This is a public API created with the API of a friend, owner of victims.bio"
     },
     routes: {
-        userinfo: 'https://localhost:4567/user?id=profileID'
+        userinfo: 'https://localhost:4567/user?id=userID',
+        usercard: 'https://localhost:4567/card?id=userID'
     }
- }.to_json
+  }.to_json
 end
 
 get '/user' do
@@ -37,5 +38,39 @@ get '/user' do
     end
   rescue => e
     { status: 500, error: 'Internal server error', details: e.message }.to_json
+  end
+end
+
+get '/card' do
+  discord_id = params['id']
+
+  if discord_id.nil? || discord_id.empty?
+    content_type :json
+    return { error: "Parameter 'id' is required. Example: /card?id=123456789" }.to_json
+  end
+
+  begin
+    response = HTTP.get("https://api.victims.bio/discord/user/discord-arts/#{discord_id}/card")
+
+    if response.status.success?
+      content_type 'image/png'
+      response.to_s
+    else
+      content_type :json
+      status 404
+      {
+        message: "Erro ao gerar o card do Discord",
+        error: "Not Found",
+        statusCode: 404
+      }.to_json
+    end
+  rescue => e
+    content_type :json
+    status 500
+    {
+      message: "Erro interno ao buscar o card",
+      error: e.message,
+      statusCode: 500
+    }.to_json
   end
 end
