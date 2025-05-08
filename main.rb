@@ -7,7 +7,7 @@ get '/' do
   { 
     status: 200,
     author: {
-        github: 'https://github.com/171ntw',
+        github: 'https://github.com/171ntw/',
         download: 'https://github.com/171ntw/victims.rb',
         message: "This is a public API created with the API of a friend, owner of victims.bio"
     },
