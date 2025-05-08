@@ -1,4 +1,4 @@
-# Discord User Info API
+# Victims API
 
 This is a public API created with the API of a friend, owner of victims.bio
 
@@ -47,10 +47,18 @@ It will run on [http://localhost:4567](http://localhost:4567).
 
 Send a GET request to `/user` with a query parameter `id` (Discord User ID).
 
+### 2. **Get User Card**
+
+Send a GET request to `/card` with a query parameter `id` (Discord User ID).
+
 #### Example Request:
 
 ```bash
 curl "http://localhost:4567/user?id=922871214312144926"
+```
+
+```bash
+curl "http://localhost:4567/card?id=922871214312144926"
 ```
 
 #### Example Response:
@@ -76,3 +84,15 @@ curl "http://localhost:4567/user?id=922871214312144926"
 ```bash
 curl "http://localhost:4567/user"
 ```
+
+---
+
+## License
+
+MIT License.
+
+Github: https://github.com/171ntw/
+
+---
+
+**Enjoy using the Discord User Info API!**
